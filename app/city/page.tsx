@@ -1,20 +1,55 @@
+import Link from 'next/link';
+import { CityMapLoader } from '@/components/city/CityMapLoader';
+
 export default function CityPage() {
   return (
-    <div className="city-grid-bg flex min-h-screen flex-col items-center justify-center">
-      <div className="flex flex-col items-center gap-4 text-center">
-        <h1 className="text-3xl font-bold" style={{ color: "var(--accent-apis)" }}>
-          Buildoria City
-        </h1>
-        <p style={{ color: "var(--text-secondary)" }}>
-          Your city map will appear here.
-        </p>
-        <div
-          className="mt-4 rounded-lg px-4 py-2 text-sm"
-          style={{ background: "var(--bg-card)", color: "var(--text-muted)", border: "1px solid var(--border-subtle)" }}
+    <div style={{ width: '100vw', height: '100vh', background: '#0b0e1a', position: 'relative' }}>
+      {/* Nav bar */}
+      <nav
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 10,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '12px 24px',
+          background: 'rgba(11, 14, 26, 0.7)',
+          backdropFilter: 'blur(8px)',
+          borderBottom: '1px solid rgba(30, 41, 59, 0.6)',
+        }}
+      >
+        <span
+          style={{
+            fontSize: '18px',
+            fontWeight: 700,
+            color: '#00d4ff',
+            letterSpacing: '-0.02em',
+          }}
         >
-          Phase 2 — 3D isometric map coming soon
-        </div>
-      </div>
+          Buildoria
+        </span>
+        <Link
+          href="/progress"
+          style={{
+            fontSize: '13px',
+            fontWeight: 500,
+            color: '#94a3b8',
+            textDecoration: 'none',
+            padding: '6px 14px',
+            borderRadius: '6px',
+            background: 'rgba(26, 34, 53, 0.8)',
+            border: '1px solid #1e293b',
+          }}
+        >
+          Progress
+        </Link>
+      </nav>
+
+      {/* 3D City */}
+      <CityMapLoader />
     </div>
   );
 }
