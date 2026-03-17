@@ -10,3 +10,5 @@
 
 - Spent some time planning the frontend this morning - decided to try using R3F (never used before) for rendering our city UI
 - Planning to start building starting from the frontend --> moving to the back. Starting out by building the city map UI.
+
+8:45 PM

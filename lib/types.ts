@@ -1,18 +1,27 @@
 export type Difficulty = "beginner" | "intermediate" | "advanced";
 
-export interface Topic {
-  id: string;
-  slug: string;
+export interface SubArea {
+  id: string;           // e.g. "sa-react"
+  regionId: string;
   name: string;
   description: string;
-  accentColor: string;
-  gridPosition: { x: number; z: number };
+  gridOffset: { x: number; z: number }; // logical cells within the region
   concepts: string[];
+}
+
+export interface Region {
+  id: string;           // e.g. "region-frontend"
+  slug: string;
+  name: string;         // e.g. "Frontend Fountain"
+  description: string;
+  accentColor: string;
+  gridOrigin: { x: number; z: number }; // world units (pre-scaled)
+  subAreas: SubArea[];
 }
 
 export interface Exercise {
   id: string;
-  topicId: string;
+  subAreaId: string;    // was topicId
   conceptId: string;
   title: string;
   prompt: string;
@@ -21,7 +30,8 @@ export interface Exercise {
 
 export interface UserMastery {
   userId: string;
-  topicId: string;
+  regionId: string;
+  subAreaId: string;    // was topicId
   conceptId: string;
   score: number; // 0–100
   lastActivityAt: string; // ISO timestamp

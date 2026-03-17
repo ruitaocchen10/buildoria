@@ -1,6 +1,6 @@
 import { create } from "zustand";
-import type { Topic, Exercise, UserMastery } from "./types";
-import { MOCK_TOPICS, MOCK_MASTERY } from "./mock-data";
+import type { Region, SubArea, Exercise, UserMastery } from "./types";
+import { MOCK_REGIONS, MOCK_MASTERY } from "./mock-data";
 
 interface User {
   id: string;
@@ -13,9 +13,9 @@ interface BuildoriaStore {
   user: User | null;
   setUser: (user: User | null) => void;
 
-  // Topics
-  topics: Topic[];
-  setTopics: (topics: Topic[]) => void;
+  // Regions
+  regions: Region[];
+  setRegions: (regions: Region[]) => void;
 
   // Mastery
   masteryScores: UserMastery[];
@@ -23,8 +23,10 @@ interface BuildoriaStore {
   updateMastery: (updated: UserMastery) => void;
 
   // Navigation
-  currentTopic: Topic | null;
-  setCurrentTopic: (topic: Topic | null) => void;
+  currentRegion: Region | null;
+  setCurrentRegion: (region: Region | null) => void;
+  currentSubArea: SubArea | null;
+  setCurrentSubArea: (subArea: SubArea | null) => void;
 
   // Exercise
   currentExercise: Exercise | null;
@@ -35,20 +37,22 @@ export const useBuildoriaStore = create<BuildoriaStore>((set) => ({
   user: null,
   setUser: (user) => set({ user }),
 
-  topics: MOCK_TOPICS,
-  setTopics: (topics) => set({ topics }),
+  regions: MOCK_REGIONS,
+  setRegions: (regions) => set({ regions }),
 
   masteryScores: MOCK_MASTERY,
   setMasteryScores: (masteryScores) => set({ masteryScores }),
   updateMastery: (updated) =>
     set((state) => ({
       masteryScores: state.masteryScores.map((m) =>
-        m.topicId === updated.topicId && m.conceptId === updated.conceptId ? updated : m
+        m.subAreaId === updated.subAreaId && m.conceptId === updated.conceptId ? updated : m
       ),
     })),
 
-  currentTopic: null,
-  setCurrentTopic: (currentTopic) => set({ currentTopic }),
+  currentRegion: null,
+  setCurrentRegion: (currentRegion) => set({ currentRegion }),
+  currentSubArea: null,
+  setCurrentSubArea: (currentSubArea) => set({ currentSubArea }),
 
   currentExercise: null,
   setCurrentExercise: (currentExercise) => set({ currentExercise }),
